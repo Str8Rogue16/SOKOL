@@ -1,4 +1,4 @@
-# DiscordAlerts
+# SOKOL
 Alerts to Discord when identified twitter accounts post on twitter. 
 
 This will be built off of Python with an API to Twitter and an alert tied to discord. 
