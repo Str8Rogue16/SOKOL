@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reports Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Reports</h1>
+
+    <form method="GET" action="/filter_reports">
+        <label for="country">Country:</label>
+        <select id="country" name="country">
+            <option value="Ukraine">Ukraine</option>
+            <option value="Belarus">Belarus</option>
+            <option value="Poland">Poland</option>
+            <option value="Turkey">Turkey</option>
+            <option value="Collective Security Treaty Organization">CSTO</option>
+        </select>
+    
+        <label for="date">Date:</label>
+        <input type="date" id="date" name="date">
+    
+        <button type="submit">Filter</button>
+    </form>
+    
+    <div>
+        {% for country, dates in reports_by_country.items() %}
+            <h2>{{ country }}</h2>
+            {% for date, reports in dates.items() %}
+                <h3>{{ date }}</h3>
+                <ul>
+                    {% for report in reports %}
+                        <li>
+                            <strong>{{ report.title }}</strong><br>
+                            <a href="{{ report.link }}" target="_blank">Read more</a><br>
+                            <small>{{ report.date }}</small><br>
+                            <small>{{ report.source }}</small>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endfor %}
+        {% endfor %}
+    </div>
+</body>
+</html>
